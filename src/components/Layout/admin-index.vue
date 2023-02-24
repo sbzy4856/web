@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import Header from './layoutHeader'
-import SideNav from '@/components/Layout/sideNav'
+import Header from './header'
+import SideNav from '@/components/Layout/side-nav'
 import router from '@/router/admin'
 export default {
   components: {
