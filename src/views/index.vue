@@ -1,27 +1,20 @@
 <template>
   <el-container>
     <el-header>
-      <Header @changeSideRouter="changeSideRouter"></Header>
+      <Header></Header>
     </el-header>
     <el-container>
-      <el-aside width="184px">
-        <SideNav :sideNavRouter="sideNavRouter" />
-      </el-aside>
-      <el-main>
-        <router-view></router-view>
-      </el-main>
+      
     </el-container>
   </el-container>
 </template>
 
 <script>
-import Header from '@/components/Layout/header'
-import SideNav from '@/components/Layout/side-nav'
+import Header from '@/components/Layout/homeHeader'
 
 export default {
   components: {
     Header,
-    SideNav
   },
   data() {
     return {
@@ -51,12 +44,14 @@ html {
 }
 .el-header {
   // background: #4c8af2;
-  background: #024996;
+  background: #29bded;
   padding: 0;
+  height: 160px !important;
 }
 .el-container {
-  background: #f4f5f7;
+  width: 80%;
   height: 100%;
+  margin-left: 10%;
 }
 .el-aside {
   background: #1d61aa;

@@ -2,7 +2,6 @@
   <div class="main-page">
     <div class="left-side-nav">
       <el-menu
-        :default-active="activerouter"
         text-color="#fff"
         background-color="#1D61AA"
         class="el-menu-vertical-demo"

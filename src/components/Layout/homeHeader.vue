@@ -20,28 +20,16 @@
           >
             {{ item.meta.title }}
           </el-menu-item>
-          <el-menu-item>学习平台</el-menu-item>
-          <el-menu-item>电子班牌管理</el-menu-item>
-          <el-menu-item>智慧表单系统</el-menu-item>
         </el-menu>
       </div>
     </div>
     <div class="header-user">
       <router-link
         class="white mr20"
-        to="/home"
+        to="/login"
       >
-        首页
+        登录
       </router-link>
-      <el-dropdown trigger="click">
-        <span class="el-dropdown-link">
-          <i class="el-icon-arrow-down el-icon--right"></i>
-        </span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>意见反馈</el-dropdown-item>
-          <el-dropdown-item>退出登录</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
     </div>
   </div>
 </template>
