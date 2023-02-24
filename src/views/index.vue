@@ -15,8 +15,9 @@
 </template>
 
 <script>
-import Header from './header'
+import Header from '@/components/Layout/header'
 import SideNav from '@/components/Layout/side-nav'
+
 export default {
   components: {
     Header,
