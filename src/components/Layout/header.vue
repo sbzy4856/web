@@ -54,14 +54,9 @@
     <feedBackDialog ref="feedBackDialog"></feedBackDialog>
   </div>
 </template>
+
 <script>
-import { findSiteSetting } from '@/api/site-setting'
 import { mapGetters } from 'vuex'
-import auth from '@/utils/auth'
-import router from '@/router/admin'
-import feedBackDialog from '@/containers/feed-back/feedBackDialog'
-import { getCasEnable, logout } from '../../api/login'
-import { userInfo } from 'os'
 export default {
   components: { feedBackDialog },
   data() {
@@ -180,7 +175,7 @@ export default {
   }
 }
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .header {
   display: flex;
   justify-content: space-between;

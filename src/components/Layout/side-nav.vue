@@ -49,11 +49,8 @@
     </div>
   </div>
 </template>
+
 <script>
-import router from '@/router/admin'
-import store from '@/store'
-import { mapGetters } from 'vuex'
-import systemManage from '@/router/system-manage'
 export default {
   props: {
     sideNavRouter: {
@@ -63,19 +60,10 @@ export default {
       }
     }
   },
-  computed: {
-    activerouter: function () {
-      let _this = this
-      let acve = ''
-      acve = _this.$route.name
-      console.log(_this.$route.name, '_this.$route.name')
-      return acve
-    }
-  },
   methods: {}
 }
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .el-menu-item {
   padding-left: 30px !important;
 }

@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<style lang="less">
+<style lang="scss">
 #app {
   // font-family: Avenir, Helvetica, Arial, sans-serif;
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
