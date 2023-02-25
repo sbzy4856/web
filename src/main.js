@@ -7,6 +7,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
 
+import '@/utils';
+
 Vue.use(ElementUI)
 
 new Vue({
