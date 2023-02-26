@@ -8,42 +8,44 @@
         :unique-opened="true"
         router
       >
-        <template v-for="(menu, index) in sideNavRouter">
-          <el-menu-item
-            v-if="!menu.children"
-            :index="menu.name"
-            :class="$route.name === menu.name ? 'is-active' : ''"
-            :key="index"
-          >
-            <span
-              :class="menu.meta.icon ? menu.meta.icon : ''"
-              slot="title"
-            >
-              {{ menu.meta.title }}
-            </span>
-          </el-menu-item>
-          <el-submenu
-            :index="menu.name"
-            v-if="menu.children"
-            :key="index"
-          >
-            <template slot="title">
-              <span :class="menu.meta.icon ? menu.meta.icon : ''">
-                {{ menu.meta.title }}
-              </span>
-            </template>
-            <el-menu-item-group>
-              <el-menu-item
-                v-for="(value, index) in menu.children"
-                :key="index"
-                :index="value.name"
-                :class="$route.name === value.name ? 'is-active' : ''"
-              >
-                {{ value.meta.title }}
-              </el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-        </template>
+        <el-menu-item
+          index="notice"
+          v-if="user.userType === '管理员'"
+        >
+          公告管理
+        </el-menu-item>
+        <el-menu-item
+          index="userInfo-manage"
+          v-if="user.userType === '管理员'"
+        >
+          用户信息管理
+        </el-menu-item>
+        <el-menu-item
+          index="teacher-project"
+          v-if="
+            user.userType === '管理员' ||
+            user.userType === '教师' ||
+            user.userType === '助教'
+          "
+        >
+          实验项目
+        </el-menu-item>
+        <el-menu-item
+          index="course-project"
+          v-if="
+            user.userType === '管理员' ||
+            user.userType === '教师' ||
+            user.userType === '助教'
+          "
+        >
+          课程管理
+        </el-menu-item>
+        <el-menu-item
+          index="student-project"
+          v-if="user.userType === '学生'"
+        >
+          实验项目
+        </el-menu-item>
       </el-menu>
     </div>
   </div>
@@ -52,11 +54,9 @@
 <script>
 export default {
   props: {
-    sideNavRouter: {
-      type: Array,
-      default: function () {
-        return []
-      }
+    user: {
+      type: Object,
+      default: () => {}
     }
   },
   methods: {}

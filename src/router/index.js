@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import admin from './admin/index'
 import student from './student'
 import teacher from './teacher'
+import userInfo from './user-info'
 
 Vue.use(VueRouter)
 
@@ -20,7 +21,8 @@ const routes = [
   },
   ...admin,
   ...teacher,
-  ...student
+  ...student,
+  ...userInfo
 ]
 
 const router = new VueRouter({

@@ -21,12 +21,12 @@ import SideNav from '@/components/Layout/side-nav'
 export default {
   components: {
     Header,
-    SideNav,
-    user: null
+    SideNav
   },
   data() {
     return {
-      sideNavRouter: []
+      sideNavRouter: [],
+      user: null
     }
   },
   created() {

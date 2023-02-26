@@ -5,8 +5,10 @@
     </el-header>
     <el-container>
       <el-aside width="184px">
-        <SideNav :sideNavRouter="sideNavRouter" />
-        
+        <SideNav
+          :sideNavRouter="sideNavRouter"
+          :user="user"
+        />
       </el-aside>
       <el-main>
         <router-view></router-view>
@@ -22,12 +24,12 @@ import SideNav from '@/components/Layout/side-nav'
 export default {
   components: {
     Header,
-    SideNav,
-    user: null
+    SideNav
   },
   data() {
     return {
-      sideNavRouter: []
+      sideNavRouter: [],
+      user: null
     }
   },
   created() {
@@ -41,7 +43,7 @@ export default {
         userType: sessionStorage.getItem('userType'),
         userAccount: sessionStorage.getItem('userAccount')
       }
-      console.log(this.user);
+      console.log(this.user)
     }
   }
 }

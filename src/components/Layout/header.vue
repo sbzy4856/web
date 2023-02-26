@@ -13,33 +13,7 @@
           @select="handleSelect"
           :default-active="activeIndex"
           router
-        >
-          <el-menu-item index="notice" v-if="user.userType === '管理员'">
-            公告管理
-          </el-menu-item>
-          <el-menu-item v-if="user.userType === '管理员'">
-            用户信息管理
-          </el-menu-item>
-          <el-menu-item
-            v-if="
-              user.userType === '管理员' ||
-              user.userType === '教师' ||
-              user.userType === '助教'
-            "
-          >
-            实验项目
-          </el-menu-item>
-          <el-menu-item
-            v-if="
-              user.userType === '管理员' ||
-              user.userType === '教师' ||
-              user.userType === '助教'
-            "
-          >
-            课程管理
-          </el-menu-item>
-          <el-menu-item v-if="user.userType === '学生'">实验项目</el-menu-item>
-        </el-menu>
+        ></el-menu>
       </div>
     </div>
     <div class="header-user">
