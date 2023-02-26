@@ -9,7 +9,10 @@
         <div class="noticeContent">
           <el-image :src="noticeImg"></el-image>
           <div class="content">
-            <div v-for="(item,index) in notice" :key="index">
+            <div
+              v-for="(item, index) in notice"
+              :key="index"
+            >
               <div>{{ item.name }}</div>
             </div>
           </div>
