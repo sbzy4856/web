@@ -18,6 +18,16 @@ const routes = [
     path: '/adminIndex',
     name: 'adminIndex',
     component: () => import('@/views/admin/admin-index')
+  },
+  {
+    path: '/studentIndex',
+    name: 'studentIndex',
+    component: () => import('@/views/student/student-index')
+  },
+  {
+    path: '/teacherIndex',
+    name: 'teacherIndex',
+    component: () => import('@/views/teacher/teacher-index')
   }
 ]
 

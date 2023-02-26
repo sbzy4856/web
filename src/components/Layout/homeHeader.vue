@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="header-site">
-      <h1>实验教学管理系统</h1>
+      <h1>实验教学管理平台</h1>
     </div>
     <div class="header-user">
       <router-link

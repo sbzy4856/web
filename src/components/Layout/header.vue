@@ -13,23 +13,30 @@
           @select="handleSelect"
           router
         >
-          <el-menu-item
-            :index="item.name"
-            v-for="(item, index) in headerMenu"
-            :key="index"
-          >
-            {{ item.meta.title }}
+          <el-menu-item v-if="user.userType === '管理员'">
+            公告管理
           </el-menu-item>
-          <el-menu-item>学习平台</el-menu-item>
-          <el-menu-item>电子班牌管理</el-menu-item>
-          <el-menu-item>智慧表单系统</el-menu-item>
+          <el-menu-item v-if="user.userType === '管理员'">
+            用户信息管理
+          </el-menu-item>
+          <el-menu-item
+            v-if="user.userType === '管理员' || user.userType === '教师'"
+          >
+            实验项目
+          </el-menu-item>
+          <el-menu-item
+            v-if="user.userType === '管理员' || user.userType === '教师'"
+          >
+            课程管理
+          </el-menu-item>
+          <el-menu-item v-if="user.userType === '学生'">实验项目</el-menu-item>
         </el-menu>
       </div>
     </div>
     <div class="header-user">
       <router-link
-        class="white mr20"
-        to="/home"
+        class="home"
+        to="/"
       >
         首页
       </router-link>
@@ -38,8 +45,8 @@
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>意见反馈</el-dropdown-item>
-          <el-dropdown-item>退出登录</el-dropdown-item>
+          <el-dropdown-item>个人信息</el-dropdown-item>
+          <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -50,6 +57,12 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  props: {
+    user: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data() {
     return {
       electronicManager: false,
@@ -60,7 +73,14 @@ export default {
     }
   },
   methods: {
-    handleSelect() {}
+    handleSelect() {},
+    logout() {
+      sessionStorage.removeItem('userAccount')
+      sessionStorage.removeItem('userId')
+      sessionStorage.removeItem('userName')
+      sessionStorage.removeItem('userType')
+      this.$router.push('/login')
+    }
   }
 }
 </script>
@@ -77,7 +97,7 @@ export default {
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      margin-left: 20px;
+      margin-left: 184px;
       .image-logo {
         height: 19px;
         margin-left: 20px;
@@ -97,16 +117,8 @@ export default {
     justify-content: flex-end;
     padding-right: 20px;
     align-items: center;
-    .user-logo {
-      height: 36px;
-      width: 36px;
-      margin: 0 6px 0 17px;
-    }
-    .username {
-      font-size: 14px;
-      font-family: PingFangSC-Regular, PingFang SC;
-      font-weight: 400;
-      color: #ffffff;
+    .home {
+      color: white;
     }
   }
 }

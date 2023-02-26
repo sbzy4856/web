@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header>
-      <Header @changeSideRouter="changeSideRouter"></Header>
+      <Header></Header>
     </el-header>
     <el-container>
       <el-aside width="184px">

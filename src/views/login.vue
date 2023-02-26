@@ -77,7 +77,17 @@ export default {
         data: this.formData
       }).then((res) => {
         console.log(res, 'res')
-        this.$router.push('/adminIndex')
+        sessionStorage.setItem('userAccount', res.userAccount)
+        sessionStorage.setItem('userId', res.userId)
+        sessionStorage.setItem('userName', res.userName)
+        sessionStorage.setItem('userType', res.userType)
+        if (res.userType === '管理员') {
+          this.$router.push('/adminIndex')
+        } else if (res.userType === '教师' || res.userType === '助教') {
+          this.$router.push('/teacherIndex')
+        } else if (res.userType === '学生') {
+          this.$router.push('/studentIndex')
+        }
       })
     }
   }
