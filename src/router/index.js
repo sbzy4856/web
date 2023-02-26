@@ -1,5 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import admin from './admin/index'
+import student from './student'
+import teacher from './teacher'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -14,21 +18,9 @@ const routes = [
     component: () => import('@/views/index'),
     children: []
   },
-  {
-    path: '/adminIndex',
-    name: 'adminIndex',
-    component: () => import('@/views/admin/admin-index')
-  },
-  {
-    path: '/studentIndex',
-    name: 'studentIndex',
-    component: () => import('@/views/student/student-index')
-  },
-  {
-    path: '/teacherIndex',
-    name: 'teacherIndex',
-    component: () => import('@/views/teacher/teacher-index')
-  }
+  ...admin,
+  ...teacher,
+  ...student
 ]
 
 const router = new VueRouter({

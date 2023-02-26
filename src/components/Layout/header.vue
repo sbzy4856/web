@@ -11,21 +11,30 @@
           class="el-menu-demo"
           mode="horizontal"
           @select="handleSelect"
+          :default-active="activeIndex"
           router
         >
-          <el-menu-item v-if="user.userType === '管理员'">
+          <el-menu-item index="notice" v-if="user.userType === '管理员'">
             公告管理
           </el-menu-item>
           <el-menu-item v-if="user.userType === '管理员'">
             用户信息管理
           </el-menu-item>
           <el-menu-item
-            v-if="user.userType === '管理员' || user.userType === '教师'"
+            v-if="
+              user.userType === '管理员' ||
+              user.userType === '教师' ||
+              user.userType === '助教'
+            "
           >
             实验项目
           </el-menu-item>
           <el-menu-item
-            v-if="user.userType === '管理员' || user.userType === '教师'"
+            v-if="
+              user.userType === '管理员' ||
+              user.userType === '教师' ||
+              user.userType === '助教'
+            "
           >
             课程管理
           </el-menu-item>
@@ -66,7 +75,7 @@ export default {
   data() {
     return {
       electronicManager: false,
-      activerouter: '',
+      activeIndex: 'notice',
       siteName: '',
       casEnable: false,
       headerMenu: []
