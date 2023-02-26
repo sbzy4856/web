@@ -5,7 +5,7 @@
         class="container b-container"
         id="b-container"
       >
-        <el
+        <div
           action=""
           method=""
           class="form"
@@ -40,8 +40,13 @@
             v-model="formData.password"
           />
           <a class="form_link">忘记密码？</a>
-          <button class="form_button button submit">登录</button>
-        </el>
+          <button
+            class="form_button button submit"
+            @click="userLogin"
+          >
+            登录
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -51,6 +56,8 @@
 import qq from '@/assets/images/QQ.png'
 import weixin from '@/assets/images/weixin.png'
 import bilibili from '@/assets/images/icon_bilibili-square.png'
+import { userLogin } from '@/api/user/login'
+import axios from 'axios'
 
 export default {
   data() {
@@ -58,45 +65,26 @@ export default {
       qq: qq,
       weixin: weixin,
       bilibili: bilibili,
-      formData: []
+      formData: {}
     }
   },
-  created() {
-    let switchCtn = document.querySelector('#switch-cnt')
-    let switchC1 = document.querySelector('#switch-c1')
-    let switchC2 = document.querySelector('#switch-c2')
-    let switchCircle = document.querySelectorAll('.switch_circle')
-    let switchBtn = document.querySelectorAll('.switch-btn')
-    let aContainer = document.querySelector('#a-container')
-    let bContainer = document.querySelector('#b-container')
-    let allButtons = document.querySelectorAll('.submit')
-    let getButtons = (e) => e.preventDefault()
-    let changeForm = (e) => {
-      // 修改类名
-      switchCtn.classList.add('is-gx')
-      setTimeout(function () {
-        switchCtn.classList.remove('is-gx')
-      }, 1500)
-      switchCtn.classList.toggle('is-txr')
-      switchCircle[0].classList.toggle('is-txr')
-      switchCircle[1].classList.toggle('is-txr')
-
-      switchC1.classList.toggle('is-hidden')
-      switchC2.classList.toggle('is-hidden')
-      aContainer.classList.toggle('is-txl')
-      bContainer.classList.toggle('is-txl')
-      bContainer.classList.toggle('is-z')
+  created() {},
+  methods: {
+    userLogin() {
+      // this.formData.userAccount = Number(this.formData.userAccount)
+      console.log(this.formData)
+      userLogin({
+        data: this.formData
+      }).then((res) => {
+        console.log(res, 'res')
+      })
+      // axios({
+      //   url: '/api/login',
+      //   method: 'post',
+      //   data: this.formData
+      // })
     }
-    // 点击切换
-    let shell = (e) => {
-      for (var i = 0; i < allButtons.length; i++)
-        allButtons[i].addEventListener('click', getButtons)
-      for (var i = 0; i < switchBtn.length; i++)
-        switchBtn[i].addEventListener('click', changeForm)
-    }
-    window.addEventListener('load', shell)
-  },
-  methods: {}
+  }
 }
 </script>
 
@@ -160,6 +148,9 @@ export default {
   flex-direction: column;
   width: 100%;
   height: 100%;
+  .form_button {
+    cursor: pointer;
+  }
 }
 .iconfont {
   width: 40px;

@@ -31,7 +31,7 @@ service.interceptors.request.use(
 // response interceptor
 service.interceptors.response.use(
   (response) => {
-    // console.log("response", response);
+    console.log("response", response);
     if (
       response.config &&
       response.config.name === 'showFileImg' &&
@@ -59,8 +59,8 @@ service.interceptors.response.use(
     if (!data) {
       window.location.reload()
     }
-    if (data.status == '200') {
-      return data.body
+    if (data.code === 200) {
+      return data.data
     }
     // if (data.status == "401" || data.status == 401) {
     //     auth.removeCurrentUser();
@@ -69,7 +69,7 @@ service.interceptors.response.use(
     //     });
     //     return;
     // }
-    if (data.status == '401' || data.status == 401) {
+    if (data.code == 401 || data.code == 401) {
       // auth.removeCurrentUser();
       localStorage.clear()
       // if (process.env.NODE_ENV !== 'development') {
@@ -84,7 +84,7 @@ service.interceptors.response.use(
       })
       return
     }
-    if (data.status == '406' || data.status == 406) {
+    if (data.code == '406' || data.code == 406) {
       if (data.body.length && data.message == '') {
         data.message = data.body[0].defaultMessage
       }
