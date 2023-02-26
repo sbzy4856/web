@@ -3,24 +3,41 @@
     <el-header>
       <Header></Header>
     </el-header>
-    <el-container>
-      
-    </el-container>
+    <el-main>
+      <div class="notice">
+        <div class="noticeTop">通知公告</div>
+        <div class="noticeContent">
+          <el-image :src="noticeImg"></el-image>
+          <div class="content">
+            <div v-for="(item,index) in notice" :key="index">
+              <div>{{ item.name }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="ruleTop">规章制度</div>
+        <div class="ruleContent"></div>
+      </div>
+    </el-main>
   </el-container>
 </template>
 
 <script>
 import Header from '@/components/Layout/homeHeader'
+import noticeImg from '@/assets/images/公告.png'
 
 export default {
   components: {
-    Header,
+    Header
   },
   data() {
     return {
-      sideNavRouter: []
+      sideNavRouter: [],
+      noticeImg: noticeImg,
+      notice: {}
     }
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -43,15 +60,14 @@ html {
   margin: 0;
 }
 .el-header {
-  // background: #4c8af2;
-  background: #29bded;
+  background: linear-gradient(#29bded, white);
   padding: 0;
   height: 160px !important;
 }
 .el-container {
-  width: 80%;
+  width: 60%;
   height: 100%;
-  margin-left: 10%;
+  margin-left: 20%;
 }
 .el-aside {
   background: #1d61aa;

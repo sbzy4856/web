@@ -1,27 +1,7 @@
 <template>
   <div class="header">
     <div class="header-site">
-      <div class="image-message">
-        <!-- <img src="@/assets/logo.png" alt="" class="image-logo" /> -->
-        <p class="company">{{ siteName }}</p>
-      </div>
-      <div class="site-nav">
-        <el-menu
-          background-color="#024996"
-          class="el-menu-demo"
-          mode="horizontal"
-          @select="handleSelect"
-          router
-        >
-          <el-menu-item
-            :index="item.name"
-            v-for="(item, index) in headerMenu"
-            :key="index"
-          >
-            {{ item.meta.title }}
-          </el-menu-item>
-        </el-menu>
-      </div>
+      <h1>实验教学管理系统</h1>
     </div>
     <div class="header-user">
       <router-link
@@ -59,25 +39,12 @@ export default {
   line-height: 60px;
   height: 60px;
   .header-site {
+    width: 80%;
     display: flex;
-    justify-content: flex-start;
-    .image-message {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      margin-left: 20px;
-      .image-logo {
-        height: 19px;
-        margin-left: 20px;
-        margin-right: 2px;
-      }
-      .company {
-        font-size: 16px;
-        font-family: PingFangSC-Regular, PingFang SC;
-        font-weight: 400;
-        color: #ffffff;
-        margin-right: 62px;
-      }
+    justify-content: center;
+    color: #009fff;
+    h1 {
+      font-size: 36px;
     }
   }
   .header-user {
@@ -97,31 +64,6 @@ export default {
       color: #ffffff;
     }
   }
-}
-.el-menu.el-menu--horizontal {
-  border-bottom: none;
-  background: #4c8af2;
-}
-.el-menu--horizontal > .el-menu-item {
-  color: #ffffff;
-  height: 49px;
-  margin-right: 30px;
-}
-.el-menu--horizontal > .el-menu-item:not(.is-disabled):focus,
-.el-menu--horizontal > .el-menu-item:not(.is-disabled):hover,
-.el-menu--horizontal > .el-submenu .el-submenu__title:hover {
-  background-color: #024996 !important;
-  color: #fffe00;
-}
-.el-menu--horizontal > .el-menu-item.is-active {
-  border-bottom: 3px solid #fffe00;
-  color: #fffe00;
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
-}
-.el-menu-item {
-  padding: 0;
-  margin-right: 30px;
 }
 .msgPrompt {
   font-size: 26px;
@@ -147,4 +89,3 @@ export default {
   color: #ffffff;
 }
 </style>
-

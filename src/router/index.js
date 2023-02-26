@@ -13,6 +13,11 @@ const routes = [
     name: 'home',
     component: () => import('@/views/index'),
     children: []
+  },
+  {
+    path: '/adminIndex',
+    name: 'adminIndex',
+    component: () => import('@/views/admin/admin-index')
   }
 ]
 

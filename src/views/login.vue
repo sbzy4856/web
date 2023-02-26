@@ -77,12 +77,8 @@ export default {
         data: this.formData
       }).then((res) => {
         console.log(res, 'res')
+        this.$router.push('/adminIndex')
       })
-      // axios({
-      //   url: '/api/login',
-      //   method: 'post',
-      //   data: this.formData
-      // })
     }
   }
 }
