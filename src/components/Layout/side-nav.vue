@@ -31,7 +31,7 @@
           实验项目
         </el-menu-item>
         <el-menu-item
-          index="course-project"
+          index="course-manage"
           v-if="
             user.userType === '管理员' ||
             user.userType === '教师' ||

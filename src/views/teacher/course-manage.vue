@@ -1,3 +1,3 @@
 <template>
-  <div>course-project</div>
+  <div>course-manage</div>
 </template>

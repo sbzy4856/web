@@ -5,7 +5,10 @@
     </el-header>
     <el-container>
       <el-aside width="184px">
-        <SideNav :sideNavRouter="sideNavRouter" />
+        <SideNav
+          :sideNavRouter="sideNavRouter"
+          :user="user"
+        />
       </el-aside>
       <el-main>
         <router-view></router-view>

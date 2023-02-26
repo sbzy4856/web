@@ -31,7 +31,7 @@ service.interceptors.request.use(
 // response interceptor
 service.interceptors.response.use(
   (response) => {
-    console.log("response", response);
+    console.log('response', response)
     if (
       response.config &&
       response.config.name === 'showFileImg' &&

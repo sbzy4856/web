@@ -102,55 +102,12 @@ export default {
     align-items: center;
     .home {
       color: white;
+      padding-right: 20px;
     }
   }
 }
-.el-menu.el-menu--horizontal {
-  border-bottom: none;
-  background: #4c8af2;
-}
-.el-menu--horizontal > .el-menu-item {
-  color: #ffffff;
-  height: 49px;
-  margin-right: 30px;
-}
-.el-menu--horizontal > .el-menu-item:not(.is-disabled):focus,
-.el-menu--horizontal > .el-menu-item:not(.is-disabled):hover,
-.el-menu--horizontal > .el-submenu .el-submenu__title:hover {
-  background-color: #024996 !important;
-  color: #fffe00;
-}
-.el-menu--horizontal > .el-menu-item.is-active {
-  border-bottom: 3px solid #fffe00;
-  color: #fffe00;
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
-}
-.el-menu-item {
-  padding: 0;
-  margin-right: 30px;
-}
-.msgPrompt {
-  font-size: 26px;
-  position: relative;
-  color: #ffffff;
-  .badge {
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    color: #ffffff;
-    background: #ff0000;
-    line-height: 20px;
-    display: block;
-    font-size: 11px !important;
-    text-align: center;
-    position: absolute;
-    top: 16%;
-    left: 66%;
-  }
-}
-
 ::v-deep .el-dropdown {
+  cursor: pointer;
   color: #ffffff;
 }
 </style>
