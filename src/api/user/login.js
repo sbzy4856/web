@@ -45,7 +45,7 @@ export function addUser(option) {
 // 登录
 export function userLogin(option) {
   return request({
-    url: `/api/login`,
+    url: `/login`,
     method: 'post',
     ...option
   })
