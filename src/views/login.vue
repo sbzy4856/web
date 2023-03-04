@@ -34,7 +34,7 @@
             v-model="formData.userAccount"
           />
           <input
-            type="text"
+            type="password"
             class="form_input"
             placeholder="密码"
             v-model="formData.password"

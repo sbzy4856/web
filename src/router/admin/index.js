@@ -7,6 +7,9 @@ export default [
   {
     path: '/adminIndex',
     name: 'adminIndex',
+    redirect: {
+      name: 'notice'
+    },
     component: () => import('@/views/admin/admin-index'),
     children: [...notice, ...userInfoManage, ...teacherProject, ...courseManage]
   }
