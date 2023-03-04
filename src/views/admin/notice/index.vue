@@ -84,6 +84,14 @@
           <el-button
             type="text"
             size="small"
+            @click="handleDelete(scope.row.noticeId)"
+          >
+            删除
+          </el-button>
+          <el-button
+            v-if="scope.row.noticeState === '未发布'"
+            type="text"
+            size="small"
             @click="handlePublish(scope.row.noticeId)"
           >
             发布
@@ -105,7 +113,11 @@
 </template>
 
 <script>
-import { getAllNotices } from '@/api/notice/notice'
+import {
+  getAllNotices,
+  modifyNoticeState,
+  deleteNotice
+} from '@/api/notice/notice'
 
 export default {
   data() {
@@ -152,10 +164,41 @@ export default {
       console.log(type, data)
     },
     handlePublish(id) {
-      console.log(id)
+      // console.log(id)
+      this.$confirm('确认发布此公告吗？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消'
+      })
+        .then(() => {
+          modifyNoticeState(id).then((res) => {
+            // console.log(res)
+            this.$message.success('发布成功！')
+            this.initData()
+          })
+        })
+        .catch(() => {
+          // this.$message('已取消删除')
+        })
+    },
+    handleDelete(id) {
+      // console.log(id)
+      this.$confirm('确认删除此公告吗？此操作不可逆。', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消'
+      })
+        .then(() => {
+          deleteNotice(id).then((res) => {
+            // console.log(res)
+            this.$message.success('删除成功')
+            this.initData()
+          })
+        })
+        .catch(() => {
+          // this.$message('已取消删除')
+        })
     },
     search() {
-      console.log(this.formData)
+      // console.log(this.formData)
       this.initData()
     },
     handleSizeChange(size) {
@@ -192,7 +235,7 @@ export default {
     margin-left: 20px;
   }
 }
-.pagination{
+.pagination {
   float: right;
   margin-top: 20px;
   margin-right: 20px;
