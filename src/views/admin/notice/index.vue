@@ -109,6 +109,10 @@
       layout="total,sizes, prev, pager, next"
       :total="paginationData.total"
     ></el-pagination>
+    <addDialog
+      ref="addDialog"
+      @onload="initData"
+    />
   </div>
 </template>
 
@@ -118,8 +122,10 @@ import {
   modifyNoticeState,
   deleteNotice
 } from '@/api/notice/notice'
+import addDialog from './components/addDialog.vue'
 
 export default {
+  components: { addDialog },
   data() {
     return {
       state: [
@@ -161,7 +167,11 @@ export default {
       this.getAllNotices()
     },
     handleAdd(type, data) {
-      console.log(type, data)
+      let option = {
+        type: type,
+        data: { ...data }
+      }
+      this.$refs.addDialog.show(option)
     },
     handlePublish(id) {
       // console.log(id)
@@ -239,5 +249,10 @@ export default {
   float: right;
   margin-top: 20px;
   margin-right: 20px;
+}
+::v-deep.el-table .cell {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>
