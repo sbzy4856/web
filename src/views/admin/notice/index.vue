@@ -51,7 +51,6 @@
       <el-table-column
         prop="noticeContent"
         label="内容"
-        width="180"
       ></el-table-column>
       <el-table-column
         prop="noticeState"

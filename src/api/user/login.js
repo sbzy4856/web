@@ -1,10 +1,11 @@
 import request from '@/utils/request'
 
 // 获取所有用户
-export function getAllUsers() {
+export function getAllUsers(option) {
   return request({
     url: `/user`,
-    method: 'get'
+    method: 'get',
+    ...option
   })
 }
 

@@ -11,7 +11,7 @@
           class="form"
           id="b-form"
         >
-          <h2 class="form_title title">登入账号</h2>
+          <h2 class="form_title title">注册账号</h2>
           <div class="form_icons">
             <el-image
               class="iconfont"
@@ -26,7 +26,7 @@
               :src="bilibili"
             ></el-image>
           </div>
-          <span class="form_span">选择登录方式或账号密码登录</span>
+          <span class="form_span">选择注册方式或账号密码注册</span>
           <input
             type="text"
             class="form_input"
@@ -39,17 +39,19 @@
             placeholder="密码"
             v-model="formData.password"
           />
-          <a
-            class="form_link"
+          <select
+            v-model="formData.userType"
+            class="form_select"
+          >
+            <option>学生</option>
+            <option>教师</option>
+            <option>助教</option>
+          </select>
+          <button
+            class="form_button button submit"
             @click="register"
           >
             注册
-          </a>
-          <button
-            class="form_button button submit"
-            @click="userLogin"
-          >
-            登录
           </button>
         </div>
       </div>
@@ -61,7 +63,7 @@
 import qq from '@/assets/images/QQ.png'
 import weixin from '@/assets/images/weixin.png'
 import bilibili from '@/assets/images/icon_bilibili-square.png'
-import { userLogin } from '@/api/user/login'
+import { addUser } from '@/api/user/login'
 import axios from 'axios'
 
 export default {
@@ -76,26 +78,11 @@ export default {
   created() {},
   methods: {
     register() {
-      this.$router.push('/register')
-    },
-    userLogin() {
-      // this.formData.userAccount = Number(this.formData.userAccount)
       console.log(this.formData)
-      userLogin({
-        data: this.formData
-      }).then((res) => {
-        console.log(res, 'res')
-        sessionStorage.setItem('userAccount', res.userAccount)
-        sessionStorage.setItem('userId', res.userId)
-        sessionStorage.setItem('userName', res.userName)
-        sessionStorage.setItem('userType', res.userType)
-        if (res.userType === '管理员') {
-          this.$router.push('/adminIndex')
-        } else if (res.userType === '教师' || res.userType === '助教') {
-          this.$router.push('/teacherIndex')
-        } else if (res.userType === '学生') {
-          this.$router.push('/studentIndex')
-        }
+      addUser({ data: { ...this.formData } }).then((res) => {
+        console.log(res)
+        this.$message.success('注册成功！')
+        this.$router.push('login')
       })
     }
   }
@@ -187,6 +174,20 @@ export default {
   height: 40px;
   margin: 4px 0;
   padding-left: 25px;
+  font-size: 13px;
+  letter-spacing: 0.15px;
+  border: none;
+  outline: none;
+  background-color: #ecf0f3;
+  transition: 0.25s ease;
+  border-radius: 8px;
+  box-shadow: inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #f9f9f9;
+}
+.form_select {
+  width: 377px;
+  height: 40px;
+  margin: 4px 0;
+  padding-left: 18px;
   font-size: 13px;
   letter-spacing: 0.15px;
   border: none;
