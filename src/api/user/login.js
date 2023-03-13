@@ -26,9 +26,9 @@ export function deleteUser(id) {
 }
 
 // 修改用户
-export function modifyUser(id, option) {
+export function modifyUser(option) {
   return request({
-    url: `/user/${id}`,
+    url: `/user`,
     method: 'put',
     ...option
   })

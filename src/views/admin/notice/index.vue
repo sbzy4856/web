@@ -62,7 +62,7 @@
       ></el-table-column>
       <el-table-column
         prop="updateTime"
-        label="操作时间"
+        label="创建时间"
       ></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
@@ -245,7 +245,7 @@ export default {
   }
 }
 .pagination {
-  float: right;
+  text-align: right;
   margin-top: 20px;
   margin-right: 20px;
 }

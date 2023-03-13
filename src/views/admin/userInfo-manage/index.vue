@@ -59,13 +59,6 @@
           <el-button
             type="text"
             size="small"
-            @click="handleAdd('detail', scope.row)"
-          >
-            查看
-          </el-button>
-          <el-button
-            type="text"
-            size="small"
             @click="handleAdd('modify', scope.row)"
           >
             编辑
@@ -73,9 +66,9 @@
           <el-button
             type="text"
             size="small"
-            @click="handleDelete(scope.row.noticeId)"
+            @click="resetPassword(scope.row)"
           >
-            删除
+            重置密码
           </el-button>
         </template>
       </el-table-column>
@@ -98,7 +91,7 @@
 </template>
 
 <script>
-import { getAllUsers, deleteUser } from '@/api/user/login'
+import { getAllUsers, modifyUser } from '@/api/user/login'
 import addDialog from './components/addDialog.vue'
 
 export default {
@@ -159,22 +152,23 @@ export default {
       }
       this.$refs.addDialog.show(option)
     },
-    handleDelete(id) {
-      // console.log(id)
-      this.$confirm('确认删除此公告吗？此操作不可逆。', '提示', {
+    resetPassword(data) {
+      // console.log(data)
+      this.$confirm('确定要将该用户的密码重置吗？重置后密码为123。', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消'
       })
         .then(() => {
-          deleteUser(id).then((res) => {
-            // console.log(res)
-            this.$message.success('删除成功')
-            this.initData()
+          let sendData = {
+            ...data
+          }
+          sendData.password = '123'
+          modifyUser({ data: { ...sendData } }).then((res) => {
+            console.log(res)
+            this.$message.success('重置成功！')
           })
         })
-        .catch(() => {
-          // this.$message('已取消删除')
-        })
+        .catch(() => {})
     },
     search() {
       // console.log(this.formData)

@@ -12,7 +12,7 @@
       :rules="rules"
     >
       <el-form-item
-        label="公告标题："
+        label="用户名："
         prop="noticeTitle"
       >
         <el-input
@@ -22,7 +22,7 @@
         ></el-input>
       </el-form-item>
       <el-form-item
-        label="公告内容："
+        label="账号："
         prop="noticeContent"
       >
         <el-input
@@ -32,26 +32,14 @@
         ></el-input>
       </el-form-item>
       <el-form-item
-        label="公告状态："
+        label="账号类型："
         prop="noticeState"
       >
-        <el-select
-          v-model="formData.noticeState"
-          clearable
+        <el-input
+          v-model="formData.noticeContent"
           :disabled="type === 'detail'"
-          placeholder="请选择公告状态"
-        >
-          <el-option
-            key="未发布"
-            label="不发布"
-            value="未发布"
-          ></el-option>
-          <el-option
-            key="已发布"
-            label="发布"
-            value="已发布"
-          ></el-option>
-        </el-select>
+          placeholder="请输入公告内容"
+        ></el-input>
       </el-form-item>
     </el-form>
     <div class="bottom">
@@ -103,6 +91,7 @@ export default {
   },
   methods: {
     show(option) {
+      console.log(option)
       this.visible = true
       this.type = option.type
       if (option.type === 'add') {
