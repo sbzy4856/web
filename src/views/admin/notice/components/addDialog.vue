@@ -28,6 +28,8 @@
         <el-input
           v-model="formData.noticeContent"
           :disabled="type === 'detail'"
+          type="textarea"
+          rows="5"
           placeholder="请输入公告内容"
         ></el-input>
       </el-form-item>

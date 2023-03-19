@@ -47,10 +47,12 @@
       <el-table-column
         prop="noticeTitle"
         label="标题"
+        :show-overflow-tooltip='true'
       ></el-table-column>
       <el-table-column
         prop="noticeContent"
         label="内容"
+        :show-overflow-tooltip='true'
       ></el-table-column>
       <el-table-column
         prop="noticeState"

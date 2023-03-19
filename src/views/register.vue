@@ -64,7 +64,6 @@ import qq from '@/assets/images/QQ.png'
 import weixin from '@/assets/images/weixin.png'
 import bilibili from '@/assets/images/icon_bilibili-square.png'
 import { addUser } from '@/api/user/login'
-import axios from 'axios'
 
 export default {
   data() {
@@ -79,11 +78,16 @@ export default {
   methods: {
     register() {
       console.log(this.formData)
-      addUser({ data: { ...this.formData } }).then((res) => {
-        console.log(res)
-        this.$message.success('注册成功！')
-        this.$router.push('login')
-      })
+      var uPattern = /^[a-zA-Z0-9_-]{4,16}$/
+      if (uPattern.test(this.formData.userAccount)) {
+        addUser({ data: { ...this.formData } }).then((res) => {
+          console.log(res)
+          this.$message.success('注册成功！')
+          this.$router.push('login')
+        })
+      } else {
+        this.$message.warning('请输入4到16位的账号！')
+      }
     }
   }
 }
