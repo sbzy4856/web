@@ -13,32 +13,22 @@
     >
       <el-form-item
         label="用户名："
-        prop="noticeTitle"
+        prop="userName"
       >
         <el-input
-          v-model="formData.noticeTitle"
+          v-model="formData.userName"
           :disabled="type === 'detail'"
-          placeholder="请输入公告标题"
+          placeholder="请输入用户名"
         ></el-input>
       </el-form-item>
       <el-form-item
         label="账号："
-        prop="noticeContent"
+        prop="userAccount"
       >
         <el-input
-          v-model="formData.noticeContent"
+          v-model="formData.userAccount"
           :disabled="type === 'detail'"
-          placeholder="请输入公告内容"
-        ></el-input>
-      </el-form-item>
-      <el-form-item
-        label="账号类型："
-        prop="noticeState"
-      >
-        <el-input
-          v-model="formData.noticeContent"
-          :disabled="type === 'detail'"
-          placeholder="请输入公告内容"
+          placeholder="请输入账号"
         ></el-input>
       </el-form-item>
     </el-form>
@@ -67,7 +57,7 @@
 </template>
 
 <script>
-import { addNotice, modifyNotice } from '@/api/notice/notice'
+import { modifyUser } from '@/api/user/login'
 
 export default {
   data() {
@@ -77,14 +67,11 @@ export default {
       type: null,
       formData: {},
       rules: {
-        noticeTitle: [
-          { required: true, message: '请输入公告标题', trigger: 'change' }
+        userName: [
+          { required: true, message: '请输入用户名', trigger: 'change' }
         ],
-        noticeContent: [
-          { required: true, message: '请输入公告内容', trigger: 'change' }
-        ],
-        noticeState: [
-          { required: true, message: '请选择公告状态', trigger: 'change' }
+        userAccount: [
+          { required: true, message: '请输入账号', trigger: 'change' }
         ]
       }
     }
@@ -110,23 +97,13 @@ export default {
     },
     save() {
       console.log(this.formData)
-      if (this.type === 'add') {
-        addNotice({ data: { ...this.formData } }).then((res) => {
-          if (res) {
-            this.$message.success('添加成功！')
-            this.visible = false
-            this.$emit('onload')
-          }
-        })
-      } else if (this.type === 'modify') {
-        modifyNotice(this.formData.noticeId, {
-          data: { ...this.formData }
-        }).then((res) => {
-          this.$message.success('修改成功！')
-          this.visible = false
-          this.$emit('onload')
-        })
-      }
+      modifyUser({
+        data: { ...this.formData }
+      }).then((res) => {
+        this.$message.success('修改成功！')
+        this.visible = false
+        this.$emit('onload')
+      })
     }
   }
 }

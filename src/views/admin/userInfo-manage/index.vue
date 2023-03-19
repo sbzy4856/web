@@ -60,6 +60,7 @@
             type="text"
             size="small"
             @click="handleAdd('modify', scope.row)"
+            v-if="scope.row.userAccount !== 'admin'"
           >
             编辑
           </el-button>
@@ -67,6 +68,7 @@
             type="text"
             size="small"
             @click="resetPassword(scope.row)"
+            v-if="scope.row.userAccount !== 'admin'"
           >
             重置密码
           </el-button>

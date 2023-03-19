@@ -27,7 +27,13 @@ const routes = [
   {
     path: '/noticeContent',
     name: 'noticeContent',
-    component: () => import('@/views/indexNoticeContent'),
+    component: () => import('@/views/index-notice-content'),
+    children: []
+  },
+  {
+    path: '/personalCenter',
+    name: 'personalCenter',
+    component: () => import('@/views/admin/personal-center'),
     children: []
   },
   ...admin,

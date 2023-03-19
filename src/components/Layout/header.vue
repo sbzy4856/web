@@ -28,7 +28,9 @@
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>个人信息</el-dropdown-item>
+          <el-dropdown-item @click.native="toPersonal">
+            个人信息
+          </el-dropdown-item>
           <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -57,6 +59,11 @@ export default {
   },
   methods: {
     handleSelect() {},
+    toPersonal() {
+      this.$router.push({
+        name: 'personalCenter'
+      })
+    },
     logout() {
       sessionStorage.removeItem('userAccount')
       sessionStorage.removeItem('userId')

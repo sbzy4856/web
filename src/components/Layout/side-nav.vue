@@ -41,8 +41,18 @@
           课程管理
         </el-menu-item>
         <el-menu-item
+          index="login-log"
+          v-if="
+            user.userType === '管理员' ||
+            user.userType === '教师' ||
+            user.userType === '助教'
+          "
+        >
+          学生考勤查看
+        </el-menu-item>
+        <el-menu-item
           index="student-project"
-          v-if="user.userType === '学生'"
+          v-if="user.userType === '管理员' || user.userType === '学生'"
         >
           实验项目
         </el-menu-item>
