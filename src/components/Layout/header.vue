@@ -65,10 +65,7 @@ export default {
       })
     },
     logout() {
-      sessionStorage.removeItem('userAccount')
-      sessionStorage.removeItem('userId')
-      sessionStorage.removeItem('userName')
-      sessionStorage.removeItem('userType')
+      sessionStorage.removeItem('userInfo')
       this.$router.push('/login')
     }
   }

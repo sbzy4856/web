@@ -37,12 +37,7 @@ export default {
   },
   methods: {
     getUserInfo() {
-      this.user = {
-        userId: sessionStorage.getItem('userId'),
-        userName: sessionStorage.getItem('userName'),
-        userType: sessionStorage.getItem('userType'),
-        userAccount: sessionStorage.getItem('userAccount')
-      }
+      this.user = JSON.parse(sessionStorage.getItem('userInfo'))
       console.log(this.user)
     }
   }

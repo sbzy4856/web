@@ -85,10 +85,7 @@ export default {
         data: this.formData
       }).then((res) => {
         console.log(res, 'res')
-        sessionStorage.setItem('userAccount', res.userAccount)
-        sessionStorage.setItem('userId', res.userId)
-        sessionStorage.setItem('userName', res.userName)
-        sessionStorage.setItem('userType', res.userType)
+        sessionStorage.setItem('userInfo', JSON.stringify(res))
         if (res.userType === '管理员') {
           this.$router.push('/adminIndex')
         } else if (res.userType === '教师' || res.userType === '助教') {
