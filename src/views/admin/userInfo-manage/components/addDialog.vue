@@ -31,6 +31,36 @@
           placeholder="请输入账号"
         ></el-input>
       </el-form-item>
+      <el-form-item
+        label="手机号："
+        prop="mobile"
+      >
+        <el-input
+          v-model="formData.mobile"
+          :disabled="type === 'detail'"
+          placeholder="请输入手机号"
+        ></el-input>
+      </el-form-item>
+      <el-form-item
+        label="邮箱："
+        prop="email"
+      >
+        <el-input
+          v-model="formData.email"
+          :disabled="type === 'detail'"
+          placeholder="请输入邮箱"
+        ></el-input>
+      </el-form-item>
+      <el-form-item
+        label="生日："
+        prop="birthday"
+      >
+        <el-input
+          v-model="formData.birthday"
+          :disabled="type === 'detail'"
+          placeholder="请输入生日"
+        ></el-input>
+      </el-form-item>
     </el-form>
     <div class="bottom">
       <el-button
