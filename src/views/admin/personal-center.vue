@@ -14,95 +14,86 @@
         <div class="formContent">
           <el-form
             ref="form"
-            :model="form"
-            label-width="80px"
+            :model="formData"
+            label-width="120px"
+            :rules="rules"
           >
-            <el-form-item label="活动名称">
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-            <el-form-item label="活动区域">
-              <el-select
-                v-model="form.region"
-                placeholder="请选择活动区域"
-              >
-                <el-option
-                  label="区域一"
-                  value="shanghai"
-                ></el-option>
-                <el-option
-                  label="区域二"
-                  value="beijing"
-                ></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="活动时间">
-              <el-col :span="11">
-                <el-date-picker
-                  type="date"
-                  placeholder="选择日期"
-                  v-model="form.date1"
-                  style="width: 100%"
-                ></el-date-picker>
-              </el-col>
-              <el-col
-                class="line"
-                :span="2"
-              >
-                -
-              </el-col>
-              <el-col :span="11">
-                <el-time-picker
-                  placeholder="选择时间"
-                  v-model="form.date2"
-                  style="width: 100%"
-                ></el-time-picker>
-              </el-col>
-            </el-form-item>
-            <el-form-item label="即时配送">
-              <el-switch v-model="form.delivery"></el-switch>
-            </el-form-item>
-            <el-form-item label="活动性质">
-              <el-checkbox-group v-model="form.type">
-                <el-checkbox
-                  label="美食/餐厅线上活动"
-                  name="type"
-                ></el-checkbox>
-                <el-checkbox
-                  label="地推活动"
-                  name="type"
-                ></el-checkbox>
-                <el-checkbox
-                  label="线下主题活动"
-                  name="type"
-                ></el-checkbox>
-                <el-checkbox
-                  label="单纯品牌曝光"
-                  name="type"
-                ></el-checkbox>
-              </el-checkbox-group>
-            </el-form-item>
-            <el-form-item label="特殊资源">
-              <el-radio-group v-model="form.resource">
-                <el-radio label="线上品牌商赞助"></el-radio>
-                <el-radio label="线下场地免费"></el-radio>
-              </el-radio-group>
-            </el-form-item>
-            <el-form-item label="活动形式">
+            <el-form-item
+              label="用户名："
+              prop="userName"
+            >
               <el-input
-                type="textarea"
-                v-model="form.desc"
+                v-model="formData.userName"
+                placeholder="请输入用户名"
               ></el-input>
             </el-form-item>
-            <el-form-item>
-              <el-button
-                type="primary"
-                @click="onSubmit"
-              >
-                立即创建
-              </el-button>
-              <el-button>取消</el-button>
+            <el-form-item
+              label="账号："
+              prop="userAccount"
+            >
+              <el-input
+                v-model="formData.userAccount"
+                placeholder="请输入账号"
+                disabled
+              ></el-input>
+            </el-form-item>
+            <el-form-item
+              label="密码："
+              prop="password"
+            >
+              <el-input
+                v-model="formData.password"
+                placeholder="请输入密码"
+                show-password
+              ></el-input>
+            </el-form-item>
+            <el-form-item
+              label="手机号："
+              prop="mobile"
+            >
+              <el-input
+                v-model="formData.mobile"
+                placeholder="请输入手机号"
+              ></el-input>
+            </el-form-item>
+            <el-form-item
+              label="邮箱："
+              prop="email"
+            >
+              <el-input
+                v-model="formData.email"
+                placeholder="请输入邮箱"
+              ></el-input>
+            </el-form-item>
+            <el-form-item
+              label="生日："
+              prop="birthday"
+            >
+              <el-input
+                v-model="formData.birthday"
+                placeholder="请输入生日"
+              ></el-input>
+            </el-form-item>
+            <el-form-item
+              label="用户类型："
+              prop="userType"
+            >
+              <el-input
+                v-model="formData.userType"
+                placeholder="请输入用户类型"
+                disabled
+              ></el-input>
             </el-form-item>
           </el-form>
+          <div slot="footer">
+            <el-button
+              type="primary"
+              style="margin-top: 20px"
+              @click="save"
+            >
+              确认修改
+            </el-button>
+          </div>
         </div>
       </el-main>
     </el-container>
@@ -112,6 +103,7 @@
 <script>
 import Header from '@/components/Layout/header'
 import SideNav from '@/components/Layout/side-nav'
+import { modifyUser } from '@/api/user/login'
 
 export default {
   components: {
@@ -122,15 +114,15 @@ export default {
     return {
       sideNavRouter: [],
       user: null,
-      form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+      formData: {},
+      rules: {
+        userName: [
+          { required: true, message: '请输入用户名', trigger: 'change' }
+        ],
+        userAccount: [
+          { required: true, message: '请输入账号', trigger: 'change' }
+        ],
+        password: [{ required: true, message: '请输入密码', trigger: 'change' }]
       }
     }
   },
@@ -140,10 +132,21 @@ export default {
   methods: {
     getUserInfo() {
       this.user = JSON.parse(sessionStorage.getItem('userInfo'))
+      this.formData = this.user
       console.log(this.user)
     },
     onSubmit() {
       console.log('submit!')
+    },
+    save() {
+      console.log(this.formData)
+      modifyUser({
+        data: { ...this.formData }
+      }).then((res) => {
+        this.$message.success('修改成功！')
+        this.visible = false
+        this.$emit('onload')
+      })
     }
   }
 }
@@ -189,5 +192,15 @@ html {
 .formContent {
   background: white;
   padding: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  .el-form {
+    width: 30%;
+    .el-form-item {
+      margin-top: 20px;
+    }
+  }
 }
 </style>

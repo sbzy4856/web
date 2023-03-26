@@ -27,8 +27,8 @@
       >
         <el-input
           v-model="formData.userAccount"
-          :disabled="type === 'detail'"
           placeholder="请输入账号"
+          disabled
         ></el-input>
       </el-form-item>
       <el-form-item
