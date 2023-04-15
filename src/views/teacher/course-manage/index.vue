@@ -60,6 +60,13 @@
           <el-button
             type="text"
             size="small"
+            @click="studentManage(scope.row)"
+          >
+            学生管理
+          </el-button>
+          <el-button
+            type="text"
+            size="small"
             @click="closeCourse(scope.row)"
             v-if="scope.row.courseState === '开启'"
           >
@@ -147,6 +154,7 @@ export default {
         this.initData()
       }
     },
+    studentManage() {},
     closeCourse(data) {
       console.log(data)
       data.courseState = '关闭'

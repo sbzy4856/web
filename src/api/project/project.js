@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// 获取所有课程
+// 获取所有实验项目
 export function getAllProjects(option) {
   return request({
     url: `/project`,
@@ -9,7 +9,7 @@ export function getAllProjects(option) {
   })
 }
 
-// 添加课程
+// 添加实验项目
 export function addProject(option, userId, userName) {
   return request({
     url: `/project`,
@@ -18,10 +18,10 @@ export function addProject(option, userId, userName) {
   })
 }
 
-// 修改课程信息
-export function updateProject(option) {
+// 修改实验项目信息
+export function updateProject(id, option) {
   return request({
-    url: `/project`,
+    url: `/project/${id}`,
     method: 'put',
     ...option
   })

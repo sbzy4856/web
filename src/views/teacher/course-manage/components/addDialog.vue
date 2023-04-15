@@ -81,25 +81,29 @@ export default {
     },
     save() {
       console.log(this.formData)
-      if (this.type === 'add') {
-        addCourse(
-          { data: { ...this.formData } },
-          this.user.userId,
-          this.user.userName
-        ).then((res) => {
-          if (res) {
-            this.$message.success('添加成功！')
-            this.visible = false
-            this.$emit('onload')
+      this.$refs.form.validate((valid) => {
+        if (valid) {
+          if (this.type === 'add') {
+            addCourse(
+              { data: { ...this.formData } },
+              this.user.userId,
+              this.user.userName
+            ).then((res) => {
+              if (res) {
+                this.$message.success('添加成功！')
+                this.visible = false
+                this.$emit('onload')
+              }
+            })
+          } else if (this.type === 'modify') {
+            updateCourse({ data: { ...this.formData } }).then((res) => {
+              this.$message.success('修改成功！')
+              this.visible = false
+              this.$emit('onload')
+            })
           }
-        })
-      } else if (this.type === 'modify') {
-        updateCourse({ data: { ...this.formData } }).then((res) => {
-          this.$message.success('修改成功！')
-          this.visible = false
-          this.$emit('onload')
-        })
-      }
+        }
+      })
     }
   }
 }

@@ -11,21 +11,21 @@
       style="width: 100%; margin-top: 20px"
     >
       <el-table-column
-        prop="courseName"
+        prop="projectName"
         label="实验项目名称"
         :show-overflow-tooltip="true"
       ></el-table-column>
       <el-table-column
-        prop="studentNum"
+        prop="courseName"
         label="关联课程名称"
       ></el-table-column>
       <el-table-column
-        prop="teacherName"
+        prop="projectType"
         label="实验项目类型"
         :show-overflow-tooltip="true"
       ></el-table-column>
       <el-table-column
-        prop="courseState"
+        prop="studentNum"
         label="学生数"
         :show-overflow-tooltip="true"
       ></el-table-column>
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { getAllCourses, updateCourse } from '@/api/course/course'
+import { getAllProjects } from '@/api/project/project'
 import addDialog from './components/addDialog.vue'
 
 export default {
@@ -95,8 +95,8 @@ export default {
     this.initData()
   },
   methods: {
-    getAllCourses(resetCurrent = false) {
-      getAllCourses({
+    getAllProjects(resetCurrent = false) {
+      getAllProjects({
         params: {
           ...this.formData,
           page: resetCurrent ? 1 : this.paginationData.current || 1,
@@ -109,7 +109,7 @@ export default {
       })
     },
     initData() {
-      this.getAllCourses()
+      this.getAllProjects()
     },
     handleAdd(type, data) {
       let option = {
