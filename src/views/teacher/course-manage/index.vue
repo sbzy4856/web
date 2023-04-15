@@ -53,6 +53,13 @@
           <el-button
             type="text"
             size="small"
+            @click="upload(scope.row)"
+          >
+            上传文件
+          </el-button>
+          <el-button
+            type="text"
+            size="small"
             @click="closeCourse(scope.row)"
             v-if="scope.row.courseState === '开启'"
           >
@@ -75,6 +82,12 @@
       ref="addDialog"
       @onload="initData"
     />
+    <upload
+      v-model="importVisible"
+      :hide-button="true"
+      :action="uploadUrl"
+      @importResult="importResult"
+    />
   </div>
 </template>
 
@@ -88,10 +101,12 @@ export default {
   },
   data() {
     return {
+      uploadUrl: '',
       formData: {},
       paginationData: {},
       tableData: [],
-      user: null
+      user: null,
+      importVisible: false
     }
   },
   created() {
@@ -123,16 +138,30 @@ export default {
       }
       this.$refs.addDialog.show(option)
     },
-    closeCourse(id) {
-      // console.log(id)
-      this.$confirm('确认发布此公告吗？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消'
-      })
+    upload(data) {
+      // this.$refs.uploadDialog.show(data)
+      this.importVisible = true
+    },
+    importResult(data) {
+      if (data && data.successNum > 0) {
+        this.initData()
+      }
+    },
+    closeCourse(data) {
+      console.log(data)
+      data.courseState = '关闭'
+      this.$confirm(
+        '确认关闭此课程吗？关闭课程代表课程结束且不可逆，请确认！',
+        '提示',
+        {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消'
+        }
+      )
         .then(() => {
-          modifyNoticeState(id).then((res) => {
-            // console.log(res)
-            this.$message.success('发布成功！')
+          updateCourse({ data: { ...data } }).then((res) => {
+            console.log(res)
+            this.$message.success('关闭成功！')
             this.initData()
           })
         })
