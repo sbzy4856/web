@@ -1,5 +1,6 @@
 import studentCourse from './student-course'
 import studentProject from './student-project'
+import courseResource from './course-resource'
 
 export default [
   {
@@ -9,6 +10,6 @@ export default [
       name: 'student-project'
     },
     component: () => import('@/views/student/student-index'),
-    children: [...studentCourse, ...studentProject]
+    children: [...studentCourse, ...studentProject, ...courseResource]
   }
 ]
