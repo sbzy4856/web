@@ -51,7 +51,7 @@
           学生考勤查看
         </el-menu-item>
         <el-menu-item
-          index="student-project"
+          index="student-course"
           v-if="user.userType === '管理员' || user.userType === '学生'"
         >
           课程信息
