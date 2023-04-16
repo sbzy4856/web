@@ -20,6 +20,7 @@
             v-loading="uploading"
             :action="action"
             :show-file-list="false"
+            :data="data"
             :on-change="handleChange"
           >
             <el-button
@@ -105,6 +106,10 @@ export default {
     downloadUrl: {
       type: String,
       default: ''
+    },
+    data: {
+      type: Object,
+      default: () => {}
     }
   },
   data() {
@@ -137,11 +142,11 @@ export default {
       console.log('info', info)
       this.uploading = true
       if (info.status == 'success') {
-        if (info.response.status == 200) {
+        if (info.response.code == 200) {
           this.upload = false
           this.uploading = false
-          this.importMsg = info.response.body
-          this.importResponseBody = info.response ? info.response.body : {}
+          // this.importMsg = info.response.body
+          this.importResponseBody = info.response ? info.response.data : {}
           this.$emit('uploadResponse', this.importResponseBody)
         } else {
           this.uploading = false

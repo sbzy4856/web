@@ -53,25 +53,52 @@
           <el-button
             type="text"
             size="small"
-            @click="upload(scope.row)"
-          >
-            上传文件
-          </el-button>
-          <el-button
-            type="text"
-            size="small"
-            @click="studentManage(scope.row)"
-          >
-            学生管理
-          </el-button>
-          <el-button
-            type="text"
-            size="small"
             @click="closeCourse(scope.row)"
             v-if="scope.row.courseState === '开启'"
           >
             关闭课程
           </el-button>
+          <el-dropdown
+            trigger="click"
+            size="small"
+          >
+            <span class="el-dropdown-link">
+              更多
+              <i
+                class="el-icon-arrow-down el-icon--right"
+                style="margin: 0"
+              ></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item @click.native="upload(scope.row)">
+                <el-button
+                  type="text"
+                  size="small"
+                  @click="upload(scope.row)"
+                >
+                  上传文件
+                </el-button>
+              </el-dropdown-item>
+              <el-dropdown-item @click.native="studentManage(scope.row)">
+                <el-button
+                  type="text"
+                  size="small"
+                  @click="studentManage(scope.row)"
+                >
+                  学生管理
+                </el-button>
+              </el-dropdown-item>
+              <el-dropdown-item @click.native="fileManage(scope.row)">
+                <el-button
+                  type="text"
+                  size="small"
+                  @click="fileManage(scope.row)"
+                >
+                  文件管理
+                </el-button>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </template>
       </el-table-column>
     </el-table>
@@ -93,7 +120,8 @@
       v-model="importVisible"
       :hide-button="true"
       :action="uploadUrl"
-      @importResult="importResult"
+      :data="uploadData"
+      @uploadResponse="uploadResponse"
     />
   </div>
 </template>
@@ -113,7 +141,8 @@ export default {
       paginationData: {},
       tableData: [],
       user: null,
-      importVisible: false
+      importVisible: false,
+      uploadData: {}
     }
   },
   created() {
@@ -147,14 +176,34 @@ export default {
     },
     upload(data) {
       // this.$refs.uploadDialog.show(data)
+      this.uploadData = {
+        userId: this.user.userId,
+        userName: this.user.userName,
+        courseId: data.courseId,
+        courseName: data.courseName
+      }
+      this.uploadUrl = `api/upload/teacher`
       this.importVisible = true
     },
-    importResult(data) {
-      if (data && data.successNum > 0) {
+    uploadResponse(data) {
+      console.log(data, 'uploadREs')
+      if (data) {
         this.initData()
+        this.$message.success('上传成功！')
       }
     },
-    studentManage() {},
+    studentManage(data) {
+      this.$router.push({
+        name: 'student-manage',
+        params: { courseId: data.courseId }
+      })
+    },
+    fileManage() {
+      this.$router.push({
+        name: 'file-manage',
+        params: { courseId: data.courseId }
+      })
+    },
     closeCourse(data) {
       console.log(data)
       data.courseState = '关闭'
@@ -220,5 +269,10 @@ export default {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.el-dropdown {
+  margin-left: 10px;
+  color: #409eff;
+  cursor: pointer;
 }
 </style>
