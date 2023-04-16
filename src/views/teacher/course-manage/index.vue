@@ -198,7 +198,7 @@ export default {
         params: { courseId: data.courseId }
       })
     },
-    fileManage() {
+    fileManage(data) {
       this.$router.push({
         name: 'file-manage',
         params: { courseId: data.courseId }

@@ -54,7 +54,7 @@
           index="student-project"
           v-if="user.userType === '管理员' || user.userType === '学生'"
         >
-          实验项目
+          课程信息
         </el-menu-item>
       </el-menu>
     </div>

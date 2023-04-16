@@ -66,51 +66,6 @@ export default {
     initData() {
       this.getAllLogs()
     },
-    handleAdd(type, data) {
-      let option = {
-        type: type,
-        data: { ...data }
-      }
-      this.$refs.addDialog.show(option)
-    },
-    handlePublish(id) {
-      // console.log(id)
-      this.$confirm('确认发布此公告吗？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消'
-      })
-        .then(() => {
-          modifyNoticeState(id).then((res) => {
-            // console.log(res)
-            this.$message.success('发布成功！')
-            this.initData()
-          })
-        })
-        .catch(() => {
-          // this.$message('已取消删除')
-        })
-    },
-    handleDelete(id) {
-      // console.log(id)
-      this.$confirm('确认删除此公告吗？此操作不可逆。', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消'
-      })
-        .then(() => {
-          deleteNotice(id).then((res) => {
-            // console.log(res)
-            this.$message.success('删除成功')
-            this.initData()
-          })
-        })
-        .catch(() => {
-          // this.$message('已取消删除')
-        })
-    },
-    search() {
-      // console.log(this.formData)
-      this.initData()
-    },
     handleSizeChange(size) {
       this.paginationData = {
         ...this.paginationData,
