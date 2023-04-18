@@ -103,6 +103,7 @@ export default {
         console.log(res)
         if (res) {
           this.$message.success('参与成功！')
+          this.initData()
         }
       })
     },
