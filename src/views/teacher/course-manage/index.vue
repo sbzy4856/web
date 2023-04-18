@@ -79,15 +79,6 @@
                   上传文件
                 </el-button>
               </el-dropdown-item>
-              <el-dropdown-item @click.native="studentManage(scope.row)">
-                <el-button
-                  type="text"
-                  size="small"
-                  @click="studentManage(scope.row)"
-                >
-                  学生管理
-                </el-button>
-              </el-dropdown-item>
               <el-dropdown-item @click.native="fileManage(scope.row)">
                 <el-button
                   type="text"
@@ -191,12 +182,6 @@ export default {
         this.initData()
         this.$message.success('上传成功！')
       }
-    },
-    studentManage(data) {
-      this.$router.push({
-        name: 'student-manage',
-        params: { courseId: data.courseId }
-      })
     },
     fileManage(data) {
       this.$router.push({

@@ -48,10 +48,9 @@
           <el-button
             type="text"
             size="small"
-            @click="closeCourse(scope.row)"
-            v-if="scope.row.courseState === '开启'"
+            @click="studentManage(scope.row)"
           >
-            关闭课程
+            学生管理
           </el-button>
         </template>
       </el-table-column>
@@ -118,27 +117,11 @@ export default {
       }
       this.$refs.addDialog.show(option)
     },
-    closeCourse(data) {
-      console.log(data)
-      data.courseState = '关闭'
-      this.$confirm(
-        '确认关闭此课程吗？关闭课程代表课程结束且不可逆，请确认！',
-        '提示',
-        {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消'
-        }
-      )
-        .then(() => {
-          updateCourse({ data: { ...data } }).then((res) => {
-            console.log(res)
-            this.$message.success('关闭成功！')
-            this.initData()
-          })
-        })
-        .catch(() => {
-          // this.$message('已取消删除')
-        })
+    studentManage(data) {
+      this.$router.push({
+        name: 'student-manage',
+        params: { courseId: data.courseId }
+      })
     },
     handleSizeChange(size) {
       this.paginationData = {

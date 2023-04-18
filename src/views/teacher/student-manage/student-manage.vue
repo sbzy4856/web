@@ -118,7 +118,7 @@ export default {
       this.initData()
     },
     back() {
-      this.$router.push('course-manage')
+      this.$router.push('teacher-project')
     },
     handleSizeChange(size) {
       this.paginationData = {
