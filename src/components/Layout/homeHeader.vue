@@ -39,10 +39,10 @@ export default {
   line-height: 60px;
   height: 60px;
   .header-site {
-    width: 80%;
+    width: 100%;
     display: flex;
     justify-content: center;
-    color: #009fff;
+    color: #555555;
     h1 {
       font-size: 36px;
     }

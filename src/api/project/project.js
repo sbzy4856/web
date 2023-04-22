@@ -9,6 +9,15 @@ export function getAllProjects(option) {
   })
 }
 
+// 根据课程Id获取实验项目
+export function findByCourseId(id, option) {
+  return request({
+    url: `/project/${id}`,
+    method: 'get',
+    ...option
+  })
+}
+
 // 添加实验项目
 export function addProject(option, userId, userName) {
   return request({

@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { getAllProjects } from '@/api/project/project'
+import { findByCourseId } from '@/api/project/project'
 import { addStudentToProject } from '@/api/student-project/student-project'
 
 export default {
@@ -72,10 +72,9 @@ export default {
     this.initData()
   },
   methods: {
-    getAllProjects(resetCurrent = false) {
-      getAllProjects({
+    findByCourseId(resetCurrent = false) {
+      findByCourseId(this.$route.params.courseId, {
         params: {
-          ...this.formData,
           page: resetCurrent ? 1 : this.paginationData.current || 1,
           size: this.paginationData.size || 10
         }
@@ -86,7 +85,7 @@ export default {
       })
     },
     initData() {
-      this.getAllProjects()
+      this.findByCourseId()
     },
     join(data) {
       console.log(data)

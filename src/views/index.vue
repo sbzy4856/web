@@ -4,6 +4,19 @@
       <Header></Header>
     </el-header>
     <el-main>
+      <el-carousel indicator-position="outside">
+        <el-carousel-item
+          class="parent-swiper"
+          v-for="(item, index) in imageData"
+          :key="index"
+        >
+          <img
+            :src="item.url"
+            alt=""
+            class="image son-swiper"
+          />
+        </el-carousel-item>
+      </el-carousel>
       <div class="notice">
         <div class="noticeTop">通知公告</div>
         <div class="noticeContent">
@@ -67,7 +80,18 @@ export default {
         title: '',
         state: ''
       },
-      paginationData: {}
+      paginationData: {},
+      imageData: [
+        {
+          url: require('@/assets/images/2023030355694.jpeg')
+        },
+        {
+          url: require('@/assets/images/2023030388728_.jpeg')
+        },
+        {
+          url: require('@/assets/images/2023030391833.jpg')
+        }
+      ]
     }
   },
   created() {
@@ -120,14 +144,15 @@ html {
   margin: 0;
 }
 .el-header {
-  background: linear-gradient(#29bded, white);
   padding: 0;
   height: 160px !important;
 }
 .el-container {
-  width: 60%;
+  background: linear-gradient(#29bded, white);
+  width: 100%;
   height: 100%;
-  margin-left: 20%;
+  padding-left: 20%;
+  padding-right: 20%;
 }
 .el-aside {
   background: #1d61aa;
@@ -166,14 +191,39 @@ html {
   font-size: 28px;
   font-weight: 700;
 }
-.ruleContent{
-  .content{
+.ruleContent {
+  .content {
     width: 80%;
     margin-left: 20px;
     border-bottom: 1px solid #dedede;
     padding: 2px;
     display: flex;
     justify-content: space-between;
+  }
+}
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 18px;
+  opacity: 0.75;
+  line-height: 300px;
+  margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
+}
+
+.parent-swiper {
+  width: 100%;
+  height: 100%;
+  .son-swiper {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 </style>

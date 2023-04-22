@@ -109,7 +109,7 @@ export default {
     },
     download(data) {
       console.log(data)
-      let filePath = `http://localhost:10086/teacher/${data.fileName}`
+      let filePath = `http://localhost:10086/teacher/${data.outfileName}`
       window.open(filePath)
       // studentDownload({ params: { file: data.filePath } }).then((res) => {
       //   console.log(res)
