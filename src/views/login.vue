@@ -91,7 +91,7 @@ export default {
         } else if (res.userType === '教师' || res.userType === '助教') {
           this.$router.push('/teacherIndex')
         } else if (res.userType === '学生') {
-          this.$router.push('/studentIndex')
+          this.$router.push('student-course')
         }
       })
     }

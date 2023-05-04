@@ -84,6 +84,23 @@
                 disabled
               ></el-input>
             </el-form-item>
+            <el-form-item
+              label="用户状态："
+              prop="userState"
+            >
+              <span v-if="formData.userState === '已激活'">
+                {{ formData.userState }}
+              </span>
+              <div v-else>
+                <span style="margin-right: 20px">{{ formData.userState }}</span>
+                <el-button
+                  type="text"
+                  @click="activate"
+                >
+                  去激活
+                </el-button>
+              </div>
+            </el-form-item>
           </el-form>
           <div slot="footer">
             <el-button
@@ -97,18 +114,21 @@
         </div>
       </el-main>
     </el-container>
+    <activate ref="activate"></activate>
   </el-container>
 </template>
 
 <script>
 import Header from '@/components/Layout/header'
 import SideNav from '@/components/Layout/side-nav'
+import activate from './components/activate'
 import { modifyUser } from '@/api/user/login'
 
 export default {
   components: {
     Header,
-    SideNav
+    SideNav,
+    activate
   },
   data() {
     return {
@@ -147,6 +167,9 @@ export default {
         this.visible = false
         this.$emit('onload')
       })
+    },
+    activate() {
+      this.$refs.activate.show()
     }
   }
 }

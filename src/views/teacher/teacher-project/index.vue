@@ -120,7 +120,10 @@ export default {
     studentManage(data) {
       this.$router.push({
         name: 'student-manage',
-        params: { courseId: data.courseId }
+        params: { courseId: data.courseId },
+        query: {
+          projectId: data.projectId
+        }
       })
     },
     handleSizeChange(size) {

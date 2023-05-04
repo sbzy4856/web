@@ -56,7 +56,11 @@ export default {
       visible: false,
       type: null,
       formData: {},
-      rules: {},
+      rules: {
+        courseName: [
+          { required: true, message: '请输入课程名称', trigger: 'change' }
+        ]
+      },
       user: null
     }
   },

@@ -11,19 +11,29 @@
       style="width: 100%; margin-top: 20px"
     >
       <el-table-column
-        prop="logAccount"
-        label="账号"
+        prop="courseName"
+        label="课程名称"
         :show-overflow-tooltip="true"
       ></el-table-column>
       <el-table-column
-        prop="logName"
-        label="姓名"
+        prop="projectName"
+        label="实验项目名称"
         :show-overflow-tooltip="true"
       ></el-table-column>
       <el-table-column
-        prop="logTime"
-        label="登录时间"
+        prop="studentName"
+        label="学生姓名"
       ></el-table-column>
+      <el-table-column
+        prop="score"
+        label="成绩"
+      ></el-table-column>
+      <el-table-column
+        prop="do"
+        label="操作"
+      >
+        <el-button type="text">评分</el-button>
+      </el-table-column>
     </el-table>
     <el-pagination
       class="pagination"
@@ -39,25 +49,23 @@
 </template>
 
 <script>
-import { getAllLogs } from '@/api/login-log/login-log'
+import { getAllStudents } from '@/api/student-project/student-project'
 
 export default {
   data() {
     return {
-      formData: {
-        title: '',
-        state: ''
-      },
+      formData: {},
       paginationData: {},
       tableData: []
     }
   },
   created() {
+    this.formData.projectId = this.$route.query.projectId
     this.initData()
   },
   methods: {
-    getAllLogs(resetCurrent = false) {
-      getAllLogs({
+    getAllStudents(resetCurrent = false) {
+      getAllStudents({
         params: {
           ...this.formData,
           page: resetCurrent ? 1 : this.paginationData.current || 1,
@@ -70,52 +78,7 @@ export default {
       })
     },
     initData() {
-      this.getAllLogs()
-    },
-    handleAdd(type, data) {
-      let option = {
-        type: type,
-        data: { ...data }
-      }
-      this.$refs.addDialog.show(option)
-    },
-    handlePublish(id) {
-      // console.log(id)
-      this.$confirm('确认发布此公告吗？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消'
-      })
-        .then(() => {
-          modifyNoticeState(id).then((res) => {
-            // console.log(res)
-            this.$message.success('发布成功！')
-            this.initData()
-          })
-        })
-        .catch(() => {
-          // this.$message('已取消删除')
-        })
-    },
-    handleDelete(id) {
-      // console.log(id)
-      this.$confirm('确认删除此公告吗？此操作不可逆。', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消'
-      })
-        .then(() => {
-          deleteNotice(id).then((res) => {
-            // console.log(res)
-            this.$message.success('删除成功')
-            this.initData()
-          })
-        })
-        .catch(() => {
-          // this.$message('已取消删除')
-        })
-    },
-    search() {
-      // console.log(this.formData)
-      this.initData()
+      this.getAllStudents()
     },
     back() {
       this.$router.push('teacher-project')

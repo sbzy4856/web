@@ -7,8 +7,21 @@
       <router-link
         class="white mr20"
         to="/login"
+        v-if="userInfo === null"
       >
         登录
+      </router-link>
+      <router-link
+        to
+        v-else
+      >
+        <el-button
+          style="color: black; text-decoration: underline; font-size: 16px"
+          type="text"
+          @click="$router.back(-1)"
+        >
+          返回
+        </el-button>
       </router-link>
     </div>
   </div>
@@ -24,8 +37,14 @@ export default {
       activerouter: '',
       siteName: '',
       casEnable: false,
-      headerMenu: []
+      headerMenu: [],
+      userInfo: null
     }
+  },
+  created() {
+    this.userInfo = sessionStorage.getItem('userInfo')
+      ? sessionStorage.getItem('userInfo')
+      : null
   },
   methods: {
     handleSelect() {}

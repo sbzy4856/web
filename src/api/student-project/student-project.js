@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 // 获取实验项目所有学生
-export function getAllFiles(option) {
+export function getAllStudents(option) {
   return request({
     url: `/studentProject`,
     method: 'get',

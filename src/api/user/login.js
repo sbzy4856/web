@@ -51,3 +51,12 @@ export function userLogin(option) {
     ...option
   })
 }
+
+// 邮箱激活
+export function activated(option) {
+  return request({
+    url: `/sendEmail`,
+    method: 'get',
+    ...option
+  })
+}
