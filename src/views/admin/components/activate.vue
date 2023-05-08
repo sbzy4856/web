@@ -27,12 +27,12 @@
         </el-button>
       </el-form-item>
       <el-form-item
-        label="邮箱："
-        prop="email"
+        label="验证码："
+        prop="code"
       >
         <el-input
-          v-model="formData.email"
-          placeholder="请输入邮箱"
+          v-model="formData.code"
+          placeholder="请输入验证码"
         ></el-input>
       </el-form-item>
     </el-form>
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { activated } from '@/api/user/login'
+import { sendEmail, active } from '@/api/user/login'
 
 export default {
   data() {
@@ -58,6 +58,7 @@ export default {
       visible: false,
       type: null,
       formData: {},
+      user: null,
       rules: {
         email: [
           { required: true, message: '请输入邮箱', trigger: 'change' },
@@ -66,13 +67,15 @@ export default {
             message: '邮箱格式不对',
             trigger: 'blur'
           }
-        ]
+        ],
+        code: [{ required: true, message: '请输入验证码', trigger: 'change' }]
       },
       user: null
     }
   },
   methods: {
-    show() {
+    show(data) {
+      this.user = data
       this.visible = true
     },
     handleClose() {
@@ -83,11 +86,7 @@ export default {
       console.log(this.formData)
       this.$refs.form.validate((valid) => {
         if (valid) {
-          activated(
-            { params: { ...this.formData } },
-            this.user.userId,
-            this.user.userName
-          ).then((res) => {
+          active(this.formData.code, this.user).then((res) => {
             if (res) {
               this.$message.success('激活成功！')
               this.visible = false
@@ -98,7 +97,15 @@ export default {
       })
     },
     sendCode() {
-      if (this.formData.email) {
+      if (this.formData.hasOwnProperty('email')) {
+        sendEmail({ params: { ...this.formData } }).then((res) => {
+          if (res) {
+            this.$message.success('发送成功！')
+            console.log(res)
+          }
+        })
+      } else {
+        this.$message.warning('请输入邮箱！')
       }
     }
   }

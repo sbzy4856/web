@@ -1,9 +1,18 @@
 import request from '@/utils/request'
 
-// 获取所有课程
+// 获取老师的课程
 export function getAllCourses(option) {
   return request({
     url: `/course`,
+    method: 'get',
+    ...option
+  })
+}
+
+// 获取所有开启的课程
+export function getCourseList(option) {
+  return request({
+    url: `/course/list`,
     method: 'get',
     ...option
   })

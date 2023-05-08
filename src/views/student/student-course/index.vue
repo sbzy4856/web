@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import { getAllCourses, updateCourse } from '@/api/course/course'
+import { getCourseList, updateCourse } from '@/api/course/course'
 
 export default {
   data() {
@@ -84,14 +84,21 @@ export default {
   },
   created() {
     this.user = JSON.parse(sessionStorage.getItem('userInfo'))
+    if (this.user.userState === '未激活') {
+      this.$confirm('您还未激活，要去激活吗？', '提示', {
+        confirmButtonText: '去激活',
+        cancelButtonText: '暂时不去'
+      }).then(() => {
+        this.$router.push('personalCenter')
+      })
+    }
     this.formData.userId = this.user.userId
     this.initData()
   },
   methods: {
-    getAllCourses(resetCurrent = false) {
-      getAllCourses({
+    getCourseList(resetCurrent = false) {
+      getCourseList({
         params: {
-          ...this.formData,
           page: resetCurrent ? 1 : this.paginationData.current || 1,
           size: this.paginationData.size || 10
         }
@@ -102,7 +109,7 @@ export default {
       })
     },
     initData() {
-      this.getAllCourses()
+      this.getCourseList()
     },
     upload(data) {
       // this.$refs.uploadDialog.show(data)

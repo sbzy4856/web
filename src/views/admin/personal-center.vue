@@ -114,7 +114,10 @@
         </div>
       </el-main>
     </el-container>
-    <activate ref="activate"></activate>
+    <activate
+      ref="activate"
+      @onload="onload"
+    ></activate>
   </el-container>
 </template>
 
@@ -155,6 +158,9 @@ export default {
       this.formData = this.user
       console.log(this.user)
     },
+    onload() {
+      this.$set(this.formData, 'userState', '已激活')
+    },
     onSubmit() {
       console.log('submit!')
     },
@@ -169,7 +175,7 @@ export default {
       })
     },
     activate() {
-      this.$refs.activate.show()
+      this.$refs.activate.show(this.user)
     }
   }
 }

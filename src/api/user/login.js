@@ -52,11 +52,21 @@ export function userLogin(option) {
   })
 }
 
-// 邮箱激活
-export function activated(option) {
+// 发送邮箱
+export function sendEmail(option) {
   return request({
     url: `/sendEmail`,
     method: 'get',
     ...option
+  })
+}
+
+// 学生激活
+export function active(code, option) {
+  return request({
+    url: `/active`,
+    method: 'post',
+    params: { code: code },
+    data: option
   })
 }
