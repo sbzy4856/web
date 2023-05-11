@@ -56,6 +56,12 @@
         >
           课程信息
         </el-menu-item>
+        <el-menu-item
+          index="student-score"
+          v-if="user.userType === '管理员' || user.userType === '学生'"
+        >
+          我参与的实验项目
+        </el-menu-item>
       </el-menu>
     </div>
   </div>

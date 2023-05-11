@@ -26,3 +26,12 @@ export function studentDownload(option) {
     ...option
   })
 }
+
+// 获取学生上传的文件
+export function getStudentFiles(option) {
+  return request({
+    url: '/file/student',
+    method: 'get',
+    ...option
+  })
+}

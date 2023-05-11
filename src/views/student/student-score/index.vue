@@ -1,11 +1,5 @@
 <template>
   <div>
-    <el-button
-      type="primary"
-      @click="back"
-    >
-      返回
-    </el-button>
     <el-table
       :data="tableData"
       style="width: 100%; margin-top: 20px"
@@ -28,22 +22,14 @@
         prop="score"
         label="成绩"
       ></el-table-column>
-      <el-table-column
-        prop="do"
-        label="操作"
-      >
+      <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button
             type="text"
-            @click="download(scope.row)"
+            size="small"
+            @click="upload(scope.row)"
           >
-            下载实验报告
-          </el-button>
-          <el-button
-            type="text"
-            @click="score(scope.row)"
-          >
-            评分
+            上传实验报告
           </el-button>
         </template>
       </el-table-column>
@@ -58,37 +44,50 @@
       layout="total,sizes, prev, pager, next"
       :total="paginationData.total"
     ></el-pagination>
-    <score
-      ref="score"
-      @onload="initData"
+    <upload
+      v-model="importVisible"
+      :hide-button="true"
+      :action="uploadUrl"
+      :data="uploadData"
+      @uploadResponse="uploadResponse"
     />
-    <downloadFile ref="downloadFile" />
   </div>
 </template>
 
 <script>
-import { getAllStudents } from '@/api/student-project/student-project'
-import score from './components/score.vue'
-import downloadFile from './components/downloadFile.vue'
+import { findByCourseId } from '@/api/project/project'
+import { getCourseByStudentId } from '@/api/student-project/student-project'
 
 export default {
-  components: { score, downloadFile },
   data() {
     return {
       formData: {},
       paginationData: {},
-      tableData: []
+      tableData: [],
+      user: null,
+      importVisible: false,
+      uploadData: {},
+      uploadUrl: ''
     }
   },
   created() {
-    this.formData.projectId = this.$route.query.projectId
+    this.user = JSON.parse(sessionStorage.getItem('userInfo'))
+    if (this.user.userState === '未激活') {
+      this.$confirm('您还未激活，要去激活吗？', '提示', {
+        confirmButtonText: '去激活',
+        cancelButtonText: '暂时不去'
+      }).then(() => {
+        this.$router.push('personalCenter')
+      })
+    }
+    this.formData.userId = this.user.userId
     this.initData()
   },
   methods: {
-    getAllStudents(resetCurrent = false) {
-      getAllStudents({
+    getCourseByStudentId(resetCurrent = false) {
+      getCourseByStudentId({
         params: {
-          ...this.formData,
+          studentId: this.user.userId,
           page: resetCurrent ? 1 : this.paginationData.current || 1,
           size: this.paginationData.size || 10
         }
@@ -99,10 +98,7 @@ export default {
       })
     },
     initData() {
-      this.getAllStudents()
-    },
-    back() {
-      this.$router.push('teacher-project')
+      this.getCourseByStudentId()
     },
     handleSizeChange(size) {
       this.paginationData = {
@@ -118,13 +114,26 @@ export default {
       }
       this.initData()
     },
-    download(row) {
-      console.log(row)
-      this.$refs.downloadFile.show(row)
+    upload(data) {
+      // this.$refs.uploadDialog.show(data)
+      this.uploadData = {
+        userId: this.user.userId,
+        userName: this.user.userName,
+        courseId: data.courseId,
+        courseName: data.courseName
+      }
+      this.uploadUrl = `api/upload/student`
+      this.importVisible = true
     },
-    score(data) {
-      console.log(data)
-      this.$refs.score.show(data)
+    uploadResponse(data) {
+      console.log(data, 'uploadREs')
+      if (data) {
+        this.initData()
+        this.$message.success('上传成功！')
+      }
+    },
+    back() {
+      this.$router.push('student-course')
     }
   }
 }

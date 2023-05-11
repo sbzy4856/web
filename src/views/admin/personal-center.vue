@@ -160,6 +160,7 @@ export default {
     },
     onload() {
       this.$set(this.formData, 'userState', '已激活')
+      sessionStorage.setItem('userInfo', JSON.stringify(this.formData))
     },
     onSubmit() {
       console.log('submit!')

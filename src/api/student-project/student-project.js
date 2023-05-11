@@ -26,3 +26,12 @@ export function revisionOfStudentGrades(option) {
     ...option
   })
 }
+
+// 获取学生参加的课程
+export function getCourseByStudentId(option) {
+  return request({
+    url: `/studentProject/studentId`,
+    method: 'get',
+    ...option
+  })
+}
