@@ -74,6 +74,7 @@
 
 <script>
 import { getAllProjects } from '@/api/project/project'
+import { getAllCourses } from '@/api/course/course'
 import addDialog from './components/addDialog.vue'
 
 export default {
@@ -85,7 +86,8 @@ export default {
       formData: {},
       paginationData: {},
       tableData: [],
-      user: null
+      user: null,
+      courseIds: []
     }
   },
   created() {
@@ -94,6 +96,22 @@ export default {
     this.initData()
   },
   methods: {
+    getAllCourses(resetCurrent = false) {
+      getAllCourses({
+        params: {
+          ...this.formData,
+          page: 1,
+          size: 500
+        }
+      }).then((res) => {
+        let { records = [], ...other } = res
+        records.forEach((item, index) => {
+          this.courseIds.push(item.courseId)
+        })
+        // this.courseIds = records
+        this.getAllProjects()
+      })
+    },
     getAllProjects(resetCurrent = false) {
       getAllProjects({
         params: {
@@ -103,12 +121,17 @@ export default {
         }
       }).then((res) => {
         let { records = [], ...other } = res
-        this.tableData = records
+        records.forEach((item, index) => {
+          if (this.courseIds.includes(item.courseId)) {
+            this.tableData.push(item)
+          }
+        })
+        // this.tableData = records
         this.paginationData = { ...other }
       })
     },
     initData() {
-      this.getAllProjects()
+      this.getAllCourses()
     },
     handleAdd(type, data) {
       let option = {
